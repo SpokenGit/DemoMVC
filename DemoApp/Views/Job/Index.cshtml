@@ -1,0 +1,32 @@
+﻿@model IEnumerable<DemoApp.Models.Job>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List of Jobs</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(m => m.JobTitle)</th>
+            <th>@Html.DisplayNameFor(m => m.JobDescription)</th>
+            <th>@Html.DisplayNameFor(m => m.JobCreateAt)</th>
+            <th>@Html.DisplayNameFor(m => m.JobExpiresAt)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null) { 
+        foreach (var job in Model)
+        {
+            <tr>
+                <td>@job.JobTitle</td>
+                <td>@job.JobDescription</td>
+                <td>(@job.JobCreateAt!=null)? @job.JobCreateAt </td>
+                <td>(@job.JobExpiresAt!=null)? @job.JobExpiresAt</td>
+            </tr>
+        }
+            }
+    </tbody>
+</table>
+
