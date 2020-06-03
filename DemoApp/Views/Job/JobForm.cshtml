@@ -6,7 +6,9 @@
 }
 
 @section scripts{
-    @Scripts.Render("~/bundles/jqueryval")
+
+   
+
 }
 
 <h2>Job Form</h2>
@@ -15,26 +17,80 @@
 {
     <div class="form-group">
         @Html.LabelFor(m => m.JobTitle)
-        @Html.TextBoxFor(m => m.JobTitle, new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.JobTitle, new { @class = "form-control", @placeholder="ENTER JOB TITLE"  })
         @Html.ValidationMessageFor(m => m.JobTitle)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.JobDescription)
-        @Html.TextBoxFor(m => m.JobDescription, new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.JobDescription, new { @class = "form-control", @placeholder="ENTER JOB DESCRIPTION"  })
         @Html.ValidationMessageFor(m => m.JobDescription)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.JobCreateAt)
-        @Html.TextBoxFor(m => m.JobCreateAt, new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.JobCreateAt, "{0:MM/dd/yyyy}", new { @class = "form-control js-fecha", @placeholder="MM/DD/YYYY" })
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.JobExpiresAt)
-        @Html.TextBoxFor(m => m.JobExpiresAt, new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.JobExpiresAt, "{0:MM/dd/yyyy}", new { @class = "form-control js-fecha",placeholder="MM/DD/YYYY" })
     </div>
     <div class="form-group">
         <input type="submit" value="Save" />
+        @Html.ActionLink("Go to List", "Index")
+
     </div>
     @Html.HiddenFor(m => m.Id)
     @Html.AntiForgeryToken()
+
+    <div class="modal fade" id="MyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">ALERT</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
 }
 
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        // Initializing the formart of the textbox fields
+        
+        $.mask.definitions['~'] = "[+-]";
+       
+        $(".js-fecha").mask("99/99/9999", {
+            completed: function () {   //Validating if the Hiredate is a correct format date as required
+                var fechaf = $(this).val().split("/");
+                var month = fechaf[0];
+                var day = fechaf[1];
+                var year = fechaf[2];
+
+                if (!isValidDate(day, month, year)) {
+                    $("#MyModal").find(".modal-body").text("Incorrect Format date. Required MM/dd/yyyy");
+                    $("#MyModal").modal("show");
+                     $(this).val("");
+                }
+            }
+        });
+
+        // validating the date object with the params
+        function isValidDate(day, month, year) {
+            var dteDate;
+            month = month - 1;
+            dteDate = new Date(year, month, day);
+           
+              return ((day==dteDate.getDate()) && (month==dteDate.getMonth()) && (year==dteDate.getFullYear()));
+        }
+    });
+</script>

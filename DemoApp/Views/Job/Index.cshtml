@@ -6,27 +6,49 @@
 
 <h2>List of Jobs</h2>
 
-<table class="table table-bordered">
+<table id="mytable" class="table table-bordered">
     <thead>
         <tr>
             <th>@Html.DisplayNameFor(m => m.JobTitle)</th>
             <th>@Html.DisplayNameFor(m => m.JobDescription)</th>
             <th>@Html.DisplayNameFor(m => m.JobCreateAt)</th>
             <th>@Html.DisplayNameFor(m => m.JobExpiresAt)</th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        @if (Model != null) { 
-        foreach (var job in Model)
+        @if (Model != null)
         {
-            <tr>
-                <td>@Html.ActionLink(@job.JobTitle,"JobForm", new { id = @job.Id} , null) </td>
-                <td>@job.JobDescription</td>
-                <td>@job.JobCreateAt </td>
-                <td>@job.JobExpiresAt</td>
-            </tr>
-        }
+            foreach (var job in Model)
+            {
+                <tr>
+                    <td>@job.JobTitle</td>
+                    <td>@job.JobDescription</td>
+                    <td>@(job.JobCreateAt?.ToString("dd MMM yyyy")) </td>
+                    <td>@(job.JobExpiresAt?.ToString("dd MMM yyyy"))</td>
+                    <td>@Html.ActionLink("Delete", "Delete", new { id = @job.Id }, new { onclick = "return confirm('Are you sure?');" })</td>
+                    <td>@Html.ActionLink("Edit", "JobForm", new { id = @job.Id }, null)</td>
+                </tr>
             }
+        }
     </tbody>
 </table>
 
+
+    <script language="javascript">
+       
+        $(document).ready(function () {
+
+         var myTable = $("#mytable").DataTable();
+
+
+            
+
+        });
+
+        
+
+
+
+    </script>

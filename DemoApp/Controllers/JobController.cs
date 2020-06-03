@@ -66,6 +66,27 @@ namespace DemoApp.Controllers
         }
 
 
+        public ActionResult Delete(int Id)
+        {
+            try
+            {
+                var jobinDB = _dbContext.Jobs.Single(c => c.Id == Id);
+                if (jobinDB != null)
+                {
+                    _dbContext.Jobs.Remove(jobinDB);
+                    _dbContext.SaveChanges();
+                }
+               
+            }
+            catch (Exception )
+            {
+                              
+            }
+            
+            return View("Index", GetJobs());
+        }
+
+
         private IEnumerable<Job> GetJobs()
         {
             return _dbContext.Jobs.ToList();

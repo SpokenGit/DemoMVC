@@ -19,6 +19,7 @@ namespace DemoApp.Models
         [Display(Name = "Job Description")]
         public string JobDescription { get; set; }
         [Display(Name="Creation Date")]
+        [DisplayFormat(DataFormatString = "{0: MM/dd/yyyy}")]
         public DateTime? JobCreateAt { get; set; }
         [Display(Name="Expire Date")]
         public DateTime? JobExpiresAt { get; set; }
