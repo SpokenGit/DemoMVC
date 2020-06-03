@@ -1,0 +1,40 @@
+﻿@model DemoApp.Models.Job
+@{
+    ViewBag.Title = "JobForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<h2>Job Form</h2>
+
+@using (Html.BeginForm("Save", "Job"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.JobTitle)
+        @Html.TextBoxFor(m => m.JobTitle, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.JobTitle)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.JobDescription)
+        @Html.TextBoxFor(m => m.JobDescription, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.JobDescription)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.JobCreateAt)
+        @Html.TextBoxFor(m => m.JobCreateAt, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.JobExpiresAt)
+        @Html.TextBoxFor(m => m.JobExpiresAt, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Save" />
+    </div>
+    @Html.HiddenFor(m => m.Id)
+    @Html.AntiForgeryToken()
+}
+

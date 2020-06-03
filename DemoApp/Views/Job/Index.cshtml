@@ -20,10 +20,10 @@
         foreach (var job in Model)
         {
             <tr>
-                <td>@job.JobTitle</td>
+                <td>@Html.ActionLink(@job.JobTitle,"JobForm", new { id = @job.Id} , null) </td>
                 <td>@job.JobDescription</td>
-                <td>(@job.JobCreateAt!=null)? @job.JobCreateAt </td>
-                <td>(@job.JobExpiresAt!=null)? @job.JobExpiresAt</td>
+                <td>@job.JobCreateAt </td>
+                <td>@job.JobExpiresAt</td>
             </tr>
         }
             }

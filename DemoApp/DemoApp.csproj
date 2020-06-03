@@ -143,6 +143,10 @@
     <Compile Include="Migrations\202006022232447_CreateDataBase.designer.cs">
       <DependentUpon>202006022232447_CreateDataBase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006031302396_JobFormCreated.cs" />
+    <Compile Include="Migrations\202006031302396_JobFormCreated.designer.cs">
+      <DependentUpon>202006031302396_JobFormCreated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Job.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -184,6 +188,7 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Job\Index.cshtml" />
+    <Content Include="Views\Job\JobForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -204,6 +209,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202006022232447_CreateDataBase.resx">
       <DependentUpon>202006022232447_CreateDataBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006031302396_JobFormCreated.resx">
+      <DependentUpon>202006031302396_JobFormCreated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
